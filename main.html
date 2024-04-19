@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #FFD700; /* Light orange background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative; /* Required for absolute positioning of the boy */
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #FFD700; /* Light orange background */
+            z-index: -1;
+        }
+
+        .countdown {
+            text-align: center;
+            color: #fff;
+        }
+
+        #countInput {
+            padding: 8px 16px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 80px;
+            text-align: center;
+        }
+
+        #timer {
+            font-size: 96px;
+            margin-top: 20px;
+        }
+
+        .button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #stopButton {
+            background-color: 
+            color: white;
+        }
+
+        #pauseButton {
+            background-color: 
+            color: white;
+        }
+
+        #playButton {
+            background-color: 
+            color: white;
+        }
+
+        #boy {
+            position: absolute;
+            bottom: 50px;
+            left: 50px; 
+            width: 100px; 
+            animation: runAround 10s linear infinite;
+        }
+
+        @keyframes runAround {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(200px) rotateY(180deg); }
+            50% { transform: translateX(400px); }
+            75% { transform: translateX(200px) rotateY(0); }
+            100% { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+
+    <div class="countdown">
+        <label for="countInput">Enter Countdown Value: </label>
+        <input type="number" id="countInput" value="10">
+        <h1 id="timer">10</h1>
+        <button id="stopButton" class="button">Stop</button>
+        <button id="pauseButton" class="button">Pause</button>
+        <button id="playButton" class="button">Play</button>
+    </div>
+
+    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const timerDisplay = document.getElementById('timer');
+            const countInput = document.getElementById('countInput');
+            const stopButton = document.getElementById('stopButton');
+            const pauseButton = document.getElementById('pauseButton');
+            const playButton = document.getElementById('playButton');
+            let count = parseInt(countInput.value);
+            let countdownInterval;
+
+            function countdown() {
+                timerDisplay.textContent = count;
+                count--;
+
+                if (count < 0) {
+                    count = parseInt(countInput.value); 
+                }
+            }
+
+            function startCountdown() {
+                countdownInterval = setInterval(countdown, 1000);
+            }
+
+            function stopCountdown() {
+                clearInterval(countdownInterval);
+                timerDisplay.textContent = countInput.value;
+            }
+
+            function pauseCountdown() {
+                clearInterval(countdownInterval);
+            }
+
+            function resumeCountdown() {
+                startCountdown();
+            }
+
+            startCountdown();
+
+            stopButton.addEventListener('click', stopCountdown);
+            pauseButton.addEventListener('click', pauseCountdown);
+            playButton.addEventListener('click', resumeCountdown);
+        });
+    </script>
+</body>
+</html>
