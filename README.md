@@ -1,3 +1,4 @@
+
 # Animated Countdown Timer
 Thi is a simple animated countdown timer web application built using HTML, CSS, and JavaScript.
 
